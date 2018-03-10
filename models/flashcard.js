@@ -19,5 +19,3 @@ module.exports = function (sequelize, DataTypes) {
     };
     return Flashcard;
 };
-
-// Sets.hasMany(Flashcards);
