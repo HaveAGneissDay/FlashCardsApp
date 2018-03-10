@@ -3,6 +3,7 @@
 //require brypt do decrypt the password
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
+const Flashcard = ('./flashcard.js');
 
 
 module.exports = (sequelize, DataTypes) => {
@@ -28,6 +29,12 @@ module.exports = (sequelize, DataTypes) => {
 
     });
   })
+  User.associate = function (models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    User.hasMany(models.Flashcard, {
+      onDelete: "cascade"
+    });
+  };
   return User
 }
-
