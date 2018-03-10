@@ -1,0 +1,94 @@
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1000px;
+  margin: 0 auto;
+}
+  /* flip the pane when hovered */
+  .flip-container:hover .flipper, .flip-container.hover .flipper {
+    transform: rotateY(180deg);
+  }
+
+.flip-container, .front, .back {
+  width: 320px;
+  margin-top: 25px;
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back {
+  backface-visibility: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
+}
+
+body {
+    background-image: url("alphabet.jpg");
+    height: 100%;
+}
+
+.frosty {
+  /*background-color: rgba(255, 255, 255, 0.8);*/
+  background-color: rgb(255, 255, 255);
+  margin-top: 25px;
+  animation: fadein 2s 2s ease-in-out forwards;
+  z-index: 1;
+}
+
+
+
+/*.content {
+  z-index: 2;
+  background: transparent;
+}*/
+
+/*@keyframes fadein {
+  from {
+     opacity: 0;
+  }
+  to {
+     opacity: 1;
+  }
+}*/
+
+#name {
+  margin-top: 50px;
+}
+
+#name, #inputfront, #inputback {
+  margin-left: 100px;
+}
+
+.button {
+  margin-left: 100px;
+}
+
+.chip {
+  margin-top: 20px;
+  margin-left: 100px;
+}
+
+.card-panel {
+  margin-right: 50px;
+}
+
