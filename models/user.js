@@ -1,4 +1,5 @@
 
+
 //require brypt do decrypt the password
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -24,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     }).catch(err => {
       // catch error
       if (err) console.log(err);
+
     });
   })
   return User
