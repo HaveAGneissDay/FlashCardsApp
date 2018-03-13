@@ -1,1 +1,10 @@
 Our/user's sets
+<div id="sets"> </div>
+<script>
+    $.get('/api/flashcard_sets', (sets) => {
+        sets.flashcards_sets.forEach((set) => {
+            
+            $('#sets').append($('<button>').text(set))
+        })
+    })
+</script>

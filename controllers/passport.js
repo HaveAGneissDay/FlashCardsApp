@@ -56,8 +56,12 @@ passport.serializeUser(function(user, done) {
 // as req.user making it accessible in our request handling.
 passport.deserializeUser(function(id, done) {
     db.User.findById(id).then((user) =>{
+        var userSession = {
+            id: user.get().id,
+            name: user.get().username
+        }
         if (user) {
-            done(null, user.get());
+            done(null, userSession);
         } else {
             done(user.errors, null);
         }
