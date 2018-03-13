@@ -28,18 +28,20 @@ class FlashcardsConstructor {
 
 
 // create the route for the root page. 
-// ensureAuthenticate checks if the user login in
-router.get('/', ensureAuthenticate, (req, res) => {
+router.get('/', (req, res) => {
     // render the index.handelbars for the '/' route, if user logged in
-    var userId = req.user.id
-    db.Flashcard.findAll({ where: {UserId: userId}}).then((flashcards) =>{
-        console.log(flashcards)
-        var flashCardsArr = []
-        flashcards.forEach((flashcard) =>{
-            flashCardsArr.push(flashcard.get())
-        })
-        res.render("index", {flashcards: flashCardsArr});
-    })
+    // console.log(req.user)
+    // var userId = req.user.id
+    
+    // db.Flashcard.findAll({ where: {UserId: userId}}).then((flashcards) =>{
+    //     console.log(flashcards)
+    //     var flashCardsArr = []
+    //     flashcards.forEach((flashcard) =>{
+    //         flashCardsArr.push(flashcard.get())
+    //     })
+    //     res.render("index", {flashcards: flashCardsArr});
+    // })
+    res.render("index")
 })
 
 // create a route for the flashcards api
@@ -54,6 +56,16 @@ router.get('/api/flashcards', (req,res) => {
     })
 })
 
+router.get('/api/flashcard_sets', (req, res) => {
+    db.Flashcard.findAll({}).then((flashcards) =>{
+        var flashCardsArrCategories = []
+        flashcards.forEach((flashcard) =>{
+            flashCardsArrCategories.push(flashcard.get().Category)
+        })
+        res.json({flashcards_sets: flashCardsArrCategories});
+    })
+})
+
 
 // checks if the user logged in, we pass it into the '/' get route
 function ensureAuthenticate(req, res, next) {
@@ -62,7 +74,7 @@ function ensureAuthenticate(req, res, next) {
         return next()
     } else {
         // if not => redirect user to the login page and send the error message
-        req.flash('error', 'You are not ligged in')
+        req.flash('error', 'You are not logged in')
         res.redirect('/login')
     }
 }
@@ -73,17 +85,39 @@ router.get('/register', (req, res) => {
     res.render('register')
 })
 
+//route on the wage where user can create a new flashcard
+router.get('/createfc', ensureAuthenticate, (req, res) => {
+    // render the register.handlebars
+    res.render('create_fc')
+})
+
+// route to the check all availible sets
+router.get('/allsets', (req, res) => {
+    // render the register.handlebars
+    res.render('sets')
+})
+
+// let user to see his/her sets
+router.get('/yoursets', ensureAuthenticate, (req, res) => {
+    // render the register.handlebars
+    res.render('sets')
+})
+
+// let user to play flashcards
+router.get('/play', (req, res) => {
+    // render the register.handlebars
+    res.render('play_fc')
+})
+
 // create a route for login page 
 router.get('/login', (req, res) => {
     // render the login.handlebars
     res.render('login')
 })
 
-router.post('/', (req, res) => {
+router.post('/createfc', (req, res) => {
     // render the login.handlebars
-    console.log("post request from the / ", req)
     var userId = req.user.id
-    console.log(userId)
     var category = req.body.category
     var title = req.body.title
     var body = req.body.flashcard_body
@@ -102,13 +136,12 @@ router.post('/', (req, res) => {
 
         var newFlashcard = new FlashcardsConstructor(userId, category, title, body)
 
-        db.Flashcard.create(newFlashcard).then((flashcards) => {
+        db.Flashcard.create(newFlashcard)
+        .then((flashcards) => {
                     req.flash('success_msg', 'New flashcard created')
-                    // and redirect user on login page
-
-                    var flashCards = flashcards.get()
-                    console.log("flashCards ", flashCards)
-                    res.render('index', {flashcards: flashcards.get()})
+                    //var flashCards = flashcards.get()
+                    //console.log("flashCards ", flashCards)
+                    res.redirect('/createfc') //, {flashcards: flashcards.get()})
         })
     }
 })
@@ -129,6 +162,8 @@ router.post('/register', (req, res) => {
 
     var errors = req.validationErrors()
 
+    console.log("validation errors", errors)
+
     if(errors) {
         // if we have the errors (as if 'epmty field') send them to the register page
         res.render('register', {
@@ -137,20 +172,19 @@ router.post('/register', (req, res) => {
     } else {
         // if all fields are not empty we need to create newUser
        var newUser = new UserConstructor(username, password)
-
-       // store the newUser in the database
         db.User.create(newUser).then((user)=>{
-                    // send user error message
-                    req.flash('error_msg', 'User with htis name is already exist')
-                    // and redirect user on login page
-                    res.redirect('/register')
-                }
-
-            )
-        
+            req.flash('success_msg', 'You are registered and can now login')
+            res.redirect('/login')
+        })
+        .catch((err) => {
+            //console.log("my error ", err.errors[0].message)
+            if (err.errors[0].message === "username must be unique") {
+                req.flash('error_msg', 'User with this username is already exist, try different username')
+                res.redirect('/register')
+            }
+        })
     }
 })
-
 
 // create the route for the User post request after he/she subbmittes the form
 router.post('/login',
