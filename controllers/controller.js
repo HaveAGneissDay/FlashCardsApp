@@ -40,10 +40,19 @@ router.get('/', ensureAuthenticate, (req, res) => {
         })
         res.render("index", {flashcards: flashCardsArr});
     })
-        
-
 })
 
+// create a route for the flashcards api
+router.get('/api/flashcards', (req,res) => {
+    db.Flashcard.findAll({}).then((flashcards) =>{
+        console.log(flashcards)
+        var flashCardsArr = []
+        flashcards.forEach((flashcard) =>{
+            flashCardsArr.push(flashcard.get())
+        })
+        res.json({flashcards: flashCardsArr});
+    })
+})
 
 
 // checks if the user logged in, we pass it into the '/' get route
