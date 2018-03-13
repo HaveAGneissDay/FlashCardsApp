@@ -10,7 +10,7 @@ const expressValidator = require('express-validator')
 const flash = require('connect-flash')
 const session = require('express-session')
 
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 3039;
 
 const app = express();
 

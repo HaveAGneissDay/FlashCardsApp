@@ -34,7 +34,7 @@ passport.use(new LocalStrategy(
                         // and start/create user session
                         done(null, user)
                     } else {
-                        // if not => send the error message to the fornt-end 
+                        // if not => send the error message to the front-end 
                         // to let user know that login failed and password is incorrect
                         done(null, false, {message: 'Invalid password'})
                     }
