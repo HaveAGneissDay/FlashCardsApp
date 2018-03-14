@@ -1,10 +1,29 @@
 Our/user's sets
 <div id="sets"> </div>
+<div id="flashcards"> </div>
 <script>
     $.get('/api/flashcard_sets', (sets) => {
         sets.flashcards_sets.forEach((set) => {
             
-            $('#sets').append($('<button>').text(set))
+            $('#sets').append($('<button class="set_button">').attr('value', set).text(set))
         })
+    })
+
+    $(document).on('click', '.set_button', function(event) {
+        //event.preventDefault()
+        var category = this.value
+        console.log("category ", category)
+
+        $.get('/api/flashcards', (flashcards) => {
+            console.log("flashcards.flashcards ", flashcards.flashcards)
+            flashcards.flashcards.forEach((flashcard) => {
+                console.log("flashcard ", flashcard)
+                console.log("flashcard.Category", flashcard.Category)
+                if (flashcard.Category === category) {
+                    $('#flashcards').append($('<div>').text(flashcard.Body))
+                }
+            })
+        })
+        //location.reload()
     })
 </script>
