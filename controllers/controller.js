@@ -207,8 +207,7 @@ router.get('/logout', (req, res) => {
    
 })
 
-//Router.update for flashcards
-//Router.post for flashcards
+
 
 module.exports = router
 
