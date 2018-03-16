@@ -14,11 +14,14 @@ passport.use(new LocalStrategy(
     
     function(username, password, done) {
         // sequilize looks for the user in the database by username
-        db.User.findOne({ where: { username: username }}) // sequelize uses promices 
+        db.User.findOne({ where: { username: username }}, function (err, user) {
+            if (err) throw err
+            // if it didn't find the user
+            // we send the error message on the webpage
+            if (!user) { return done(null, false, {message: 'Unknown User'}) }
+       }) // sequelize uses promices 
        .then(user => {
-            if (!user) { 
-                return done(null, false, {message: 'Unknown User'}) 
-            } else {
+            if (user) {
                 // if user exists we need to compare the password
                 // from the login form and the encrypted password stored 
                 // in the database associated with the username

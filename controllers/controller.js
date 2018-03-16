@@ -3,7 +3,6 @@
 const express = require('express')
 const passport = require('./passport')
 var LocalStrategy = require('passport-local').Strategy;
-const url = require('url');
 const router = express.Router()
 var bcrypt = require('bcrypt');
 // download the models of User from user.js and Sequelize from index.js
@@ -30,60 +29,30 @@ class FlashcardsConstructor {
 
 // create the route for the root page. 
 router.get('/', (req, res) => {
+    // render the index.handelbars for the '/' route, if user logged in
+    // console.log(req.user)
+    // var userId = req.user.id
+    
+    // db.Flashcard.findAll({ where: {UserId: userId}}).then((flashcards) =>{
+    //     console.log(flashcards)
+    //     var flashCardsArr = []
+    //     flashcards.forEach((flashcard) =>{
+    //         flashCardsArr.push(flashcard.get())
+    //     })
+    //     res.render("index", {flashcards: flashCardsArr});
+    // })
     res.render("index")
 })
 
 // create a route for the flashcards api
 router.get('/api/flashcards', (req,res) => {
     db.Flashcard.findAll({}).then((flashcards) =>{
-        //console.log(flashcards)
+        console.log(flashcards)
         var flashCardsArr = []
         flashcards.forEach((flashcard) =>{
             flashCardsArr.push(flashcard.get())
         })
         res.json({flashcards: flashCardsArr});
-    })
-})
-
-router.get('/allsets', (req, res) => {
-    db.Flashcard.findAll({}).then((flashcards) =>{
-
-        var flashCardsArrCategory = []
-        flashcards.forEach((flashcard) =>{
-            flashCardsArrCategory.push(flashcard.get().Category)
-        })
-        
-        //console.log("flashCardsArrCategory ", flashCardsArrCategory)
-        var flashCardsArrUniqueCategory = []
-        for(i=0; i<flashCardsArrCategory.length; i++) {
-
-            if(flashCardsArrUniqueCategory.indexOf(flashCardsArrCategory[i]) < 0) {
-                flashCardsArrUniqueCategory.push(flashCardsArrCategory[i])
-            }
-        }
-        //console.log("flashCardsArrUniqueCategory ", flashCardsArrUniqueCategory)
-        res.render("sets", {flashcardsCategory: flashCardsArrUniqueCategory});
-    })
-})
-
-router.get('/yoursets', ensureAuthenticate, (req, res) => {
-    // render the index.handelbars for the '/' route, if user logged in
-    
-    var userId = req.user.id
-    
-    db.Flashcard.findAll({ where: {UserId: userId}}).then((flashcards) =>{
-        var flashCardsArrCategory = []
-        flashcards.forEach((flashcard) =>{
-            flashCardsArrCategory.push(flashcard.get().Category)
-        })
-        var flashCardsArrUniqueCategory = []
-        for(i=0; i<flashCardsArrCategory.length; i++) {
-
-            if(flashCardsArrUniqueCategory.indexOf(flashCardsArrCategory[i]) < 0) {
-                flashCardsArrUniqueCategory.push(flashCardsArrCategory[i])
-            }
-        }
-        res.render("sets", {flashcardsCategory: flashCardsArrUniqueCategory});
     })
 })
 
@@ -93,7 +62,6 @@ router.get('/api/flashcard_sets', (req, res) => {
         flashcards.forEach((flashcard) =>{
             flashCardsArrCategories.push(flashcard.get().Category)
         })
-        
         res.json({flashcards_sets: flashCardsArrCategories});
     })
 })
@@ -120,66 +88,26 @@ router.get('/register', (req, res) => {
 //route on the wage where user can create a new flashcard
 router.get('/createfc', ensureAuthenticate, (req, res) => {
     // render the register.handlebars
-    var userId = req.user.id
-    var Set = function (set){
-        this.set = set
-    }
-    db.Flashcard.findAll({ where: {UserId: userId}}).then((flashcards) =>{
-        var flashCardsArrCategory = []
-        flashcards.forEach((flashcard) =>{
-            flashCardsArrCategory.push(flashcard.get().Category)
-        })
-        var setsUnObjects = []
-        var setsUnArr = []
-        for(i=0; i<flashCardsArrCategory.length; i++) {
-
-            if(setsUnArr.indexOf(flashCardsArrCategory[i]) < 0) {
-                setsUnArr.push(flashCardsArrCategory[i])
-                setsUnObjects.push(new Set(flashCardsArrCategory[i]))
-            }
-        }
-        //console.log(setsUnObjects)
-        res.render('create_fc', {sets: setsUnObjects});
-    })
+    res.render('create_fc')
 })
 
-
-router.get('/play', (req, res) => {
-    res.render('play_fc')
+// route to the check all availible sets
+router.get('/allsets', (req, res) => {
+    // render the register.handlebars
+    res.render('sets')
 })
 
-router.get('/api/flashcards/category/:category', (req, res) => {
-   
-    var category = req.params.category
-    console.log("category insidw of /api/flashcards/category/:category", category)
-    db.Flashcard.findAll({ where: {Category: category}}).then((flashcards) =>{
-        
-        var flashCardsArr = []
-        flashcards.forEach((flashcard) =>{
-            flashCardsArr.push(flashcard.get())
-        })
-        //console.log(flashCardsArr)
-        res.json({ flashcards: flashCardsArr })
-    })
+// let user to see his/her sets
+router.get('/yoursets', ensureAuthenticate, (req, res) => {
+    // render the register.handlebars
+    res.render('sets')
 })
 
 // let user to play flashcards
-router.get('/:category', (req, res) => {
-    // console.log("req /play", req)
-    var category = req.params.category
-   console.log("passedSet inside of get /play ", category)
-
-
-//    db.Flashcard.findAll({ where: {Category: category}}).then((flashcards) =>{
-       
-//        var flashCardsArr = []
-//        flashcards.forEach((flashcard) =>{
-//            flashCardsArr.push(flashcard.get())
-//        })
-       //console.log(flashCardsArr)
-       res.render('play_fc', { category: category})
-   })
-
+router.get('/play', (req, res) => {
+    // render the register.handlebars
+    res.render('play_fc')
+})
 
 // create a route for login page 
 router.get('/login', (req, res) => {
@@ -279,4 +207,7 @@ router.get('/logout', (req, res) => {
    
 })
 
+
+
 module.exports = router
+
