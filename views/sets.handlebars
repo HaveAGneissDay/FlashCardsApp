@@ -1,10 +1,21 @@
-Our/user's sets
-<div id="sets"> </div>
-<script>
-    $.get('/api/flashcard_sets', (sets) => {
-        sets.flashcards_sets.forEach((set) => {
-            
-            $('#sets').append($('<button>').text(set))
-        })
-    })
-</script>
+<div class="row">
+  {{#each flashcardsCategory}}
+    <div class="content">
+          <div class="col s3">
+              <div class="frosty set">
+                    <div id="containerone">
+                        <div class="row module">
+                          <div class="setname">
+                          <p><b>Name of Set:</b> {{this}} </p>
+                          </div>
+                              <a href="/{{this}}" class="waves-effect waves-light #e57373 red lighten-2 btn">Play this set!</a> 
+                        </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  {{/each}}
+</div>
+
+
+  
