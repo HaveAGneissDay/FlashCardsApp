@@ -1,1 +1,299 @@
-About page
+
+	<div class="content">
+    	<div class="row">
+			<div class="col s1"></div>
+			<div class="col s10">
+				<div class="frosty center">
+					<div class="welcome row">
+	        			<h5><b>Welcome to the Flashcard application. 
+							We encourage you to sign up and login to make the best 
+							use of all the flashcard features. 
+							You may browse other people's flashcard 
+							sets or create your own. Happy studying!</b></h5>
+      				</div>
+					<div class="row">
+						<div class="col s1"></div>
+						<div class="col s10">
+							<div class="baraja-demo">
+									<ul id="baraja-el" class="baraja-container">
+										<li><img src="assets/images/1.jpg" alt="image1"/><h4>Coco Loko</h4><p>Total bicycle rights in blog four loko raw denim ex, helvetica sapiente odio placeat.</p></li>
+										<li><img src="assets/images/2.jpg" alt="image2"/><h4>Vermouth Land</h4><p>Velit chambray fugiat, enim aesthetic esse ullamco typewriter.</p></li>
+										<li><img src="assets/images/3.jpg" alt="image3"/><h4>Electrodynamics</h4><p>Before they sold out PBR magna jean shorts non seitan ea. Dolor wolf pop-up.</p></li>
+										<li><img src="assets/images/4.jpg" alt="image4"/><h4>Retinal Bliss</h4><p>Locavore vero ad, before they sold out food truck bushwick helvetica.</p></li>
+										<li><img src="assets/images/5.jpg" alt="image5"/><h4>Disco Fever</h4><p>Cillum laboris consequat, qui elit retro next level skateboard freegan hella.</p></li>
+										<li><img src="assets/images/6.jpg" alt="image6"/><h4>Serenity</h4><p>Truffaut wes anderson hoodie 3 wolf moon labore, fugiat lomo iphone eiusmod vegan.</p></li>
+										<li><img src="assets/images/7.jpg" alt="image7"/><h4>Dark Honor</h4><p>Chillwave mustache pinterest, marfa seitan umami id farm-to-table iphone.</p></li>
+										<li><img src="assets/images/8.jpg" alt="image8"/><h4>Nested Happiness</h4><p>Minim post-ironic banksy american apparel iphone wayfarers.</p></li>
+										<li><img src="assets/images/9.jpg" alt="image9"/><h4>Cherry Country</h4><p>Sint vinyl Austin street art odd future id trust fund, terry richardson cray.</p></li>
+										<li><img src="assets/images/10.jpg" alt="image10"/><h4>Cherry Country</h4><p>Sint vinyl Austin street art odd future id trust fund, terry richardson cray.</p></li>
+										<li><img src="assets/images/11.jpg" alt="image11"/><h4>Coco Loko</h4><p>Total bicycle rights in blog four loko raw denim ex, helvetica sapiente odio placeat.</p></li>
+										<li><img src="assets/images/12.jpg" alt="image12"/><h4>Vermouth Land</h4><p>Velit chambray fugiat, enim aesthetic esse ullamco typewriter.</p></li>
+										<li><img src="assets/images/3.jpg" alt="image3"/><h4>Electrodynamics</h4><p>Before they sold out PBR magna jean shorts non seitan ea. Dolor wolf pop-up.</p></li>
+										<li><img src="assets/images/4.jpg" alt="image4"/><h4>Retinal Bliss</h4><p>Locavore vero ad, before they sold out food truck bushwick helvetica.</p></li>
+										<li><img src="assets/images/5.jpg" alt="image5"/><h4>Disco Fever</h4><p>Cillum laboris consequat, qui elit retro next level skateboard freegan hella.</p></li>
+										<li><img src="assets/images/6.jpg" alt="image6"/><h4>Serenity</h4><p>Truffaut wes anderson hoodie 3 wolf moon labore, fugiat lomo iphone eiusmod vegan.</p></li>
+										<li><img src="assets/images/7.jpg" alt="image7"/><h4>Dark Honor</h4><p>Chillwave mustache pinterest, marfa seitan umami id farm-to-table iphone.</p></li>
+										<li><img src="assets/images/8.jpg" alt="image8"/><h4>Nested Happiness</h4><p>Minim post-ironic banksy american apparel iphone wayfarers.</p></li>
+									</ul>
+							</div>
+
+						</div>
+						<div class="col s1"></div>
+					</div>
+					<div class="row separator"></div>
+					<div class="row">
+						<div class="col s2"></div>
+						<div class="col s7">
+							<a class="nav-fan7 waves-effect waves-light #e57373 red lighten-2 btn">Fan right!</a>
+    						<a class="nav-fan8 waves-effect waves-light #e57373 red lighten-2 btn">Fan left!</a>
+						</div>
+						<div class="col s2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col s1"></div>
+      	</div>
+    </div>
+
+
+
+<script type="text/javascript"> 
+  $(function() {
+
+        var $el = $( '#baraja-el' ),
+          baraja = $el.baraja();
+
+        // navigation
+        $( '#nav-prev' ).on( 'click', function( event ) {
+
+          baraja.previous();
+        
+        } );
+
+        $( '#nav-next' ).on( 'click', function( event ) {
+
+          baraja.next();
+        
+        } );
+
+        // simple fan
+        $( '#nav-fan' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 90,
+            direction : 'right',
+            origin : { x : 25, y : 100 },
+            center : true
+          } );
+        
+        } );
+
+        $( '#nav-fan2' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 90,
+            direction : 'left',
+            // note that the x origin changes (symmetric)
+            origin : { x : 75, y : 100 },
+            center : true
+          } );
+        
+        } );
+
+        // more realistic fan: without common origin (means the origin changes / increments by card )
+        $( '#nav-fan3' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 90,
+            direction : 'right',
+            origin : { minX : 20, maxX : 80, y : 100 },
+            center : true,
+            translation : 60
+          } );
+        
+        } );
+
+        $( '#nav-fan4' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 90,
+            direction : 'left',
+            origin : { minX : 20, maxX : 80, y : 100 },
+            center : true,
+            translation : 60
+          } );
+        
+        } );
+
+        // playing with different origins and ranges  
+        $( '#nav-fan5' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 100,
+            direction : 'right',
+            origin : { x : 50, y : 200 },
+            center : true
+          } );
+        
+        } );
+
+        $( '#nav-fan6' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 80,
+            direction : 'left',
+            origin : { x : 200, y : 50 },
+            center : true
+          } );
+        
+        } );
+
+        // center false, playing with translation
+        $( '.nav-fan7' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 20,
+            direction : 'right',
+            origin : { x : 50, y : 200 },
+            center : false,
+            translation : 300
+          } );
+        
+        } );
+
+        $( '.nav-fan8' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 20,
+            direction : 'left',
+            origin : { x : 50, y : 200 },
+            center : false,
+            translation : 300
+          } );
+        
+        } );
+
+        // using scatter : true
+        $( '#nav-fan9' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 20,
+            direction : 'right',
+            origin : { x : 50, y : 200 },
+            center : false,
+            translation : 300,
+            scatter : true
+          } );
+        
+        } );
+
+        $( '#nav-fan10' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 20,
+            direction : 'left',
+            origin : { x : 50, y : 200 },
+            center : false,
+            translation : 300,
+            scatter : true
+          } );
+        
+        } );
+
+        $( '#nav-fanOther1' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 130,
+            direction : 'left',
+            origin : { x : 25, y : 100 },
+            center : false
+          } );
+        
+        } );
+
+        $( '#nav-fanOther2' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 360,
+            direction : 'left',
+            origin : { x : 50, y : 90 },
+            center : false
+          } );
+        
+        } );
+
+        $( '#nav-fanOther3' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 330,
+            direction : 'left',
+            origin : { x : 50, y : 100 },
+            center : true
+          } );
+        
+        } );
+
+        $( '#nav-fanOther4' ).on( 'click', function( event ) {
+
+          baraja.fan( {
+            speed : 500,
+            easing : 'ease-out',
+            range : 90,
+            direction : 'right',
+            origin : { minX : 20, maxX : 80, y : 100 },
+            center : true,
+            translation : 60,
+            scatter : true
+          } );
+        
+        } );
+
+        // close the baraja
+        $( '#close' ).on( 'click', function( event ) {
+
+          baraja.close();
+        
+        } );
+
+        // example of how to add more items
+        $( '#add' ).on( 'click', function( event ) {
+
+          if( $( this ).hasClass( 'disabled' ) ) {
+            return false;
+          }
+
+          $( this ).addClass( 'disabled' );
+
+          baraja.add( $('<li><img src="images/6.jpg" alt="image6"/><h4>Serenity</h4><p>Truffaut wes anderson hoodie 3 wolf moon labore, fugiat lomo iphone eiusmod vegan.</p></li><li><img src="images/7.jpg" alt="image7"/><h4>Dark Honor</h4><p>Chillwave mustache pinterest, marfa seitan umami id farm-to-table iphone.</p></li><li><img src="images/8.jpg" alt="image8"/><h4>Nested Happiness</h4><p>Minim post-ironic banksy american apparel iphone wayfarers.</p></li><li><img src="images/9.jpg" alt="image9"/><h4>Cherry Country</h4><p>Sint vinyl Austin street art odd future id trust fund, terry richardson cray.</p></li>') );
+        
+        } );
+
+      });
+
+</script>

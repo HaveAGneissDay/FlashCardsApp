@@ -1,145 +1,61 @@
- <nav>
-    <div class="nav-wrapper">
-      {{!-- <a href="#" class="brand-logo center"></a> --}}
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href="sass.html">How to Play the Game</a></li>
-        <li><a href="badges.html">Explore Other Sets</a></li>
-        <li class="active"><a href="collapsible.html">Your Flashcards</a></li>
-      </ul>
-    </div>
-  </nav>
 
-    <div class="chip">
-    Tag
-    <i class="close material-icons">close</i>
-  </div>
+<div class="content">
+    <div class="row">
+        <div class="col s3"></div>
+        <div id="containerone">
+            <div class="col s6">
+                <div class="frosty">
+                  <div class="row module">  
+                    <form method="post" action="/createfc" class="form-signin">
+                        <h5 class="form-signin-heading">Create a flashcard</h5>
+                            <div id ="name">
+                                <div class="input-field" >
+                                  {{!-- <div class="col s9"> --}}
+                                      <input placeholder="Enter your set name here" id="first_name" list="sets" name="category" type="text">
+                                      <label for="first_name">Name of Set</label>
+                                  {{!-- </div> --}}
+                                  {{!-- <div class="col s3"> --}}
+                                        {{#if sets}}
+                                          <datalist id="sets">
+                                            
+                                            {{#each sets}}
+                                              <option value="{{set}}">
+                                            {{/each}}
+                                          </datalist>
+                                        {{/if}}
+                                </div> 
+                            </div>
+                      
 
-  <div class="chip">
-    Tag
-    <i class="close material-icons">close</i>
-  </div>
-
-  <div class="chip">
-    Tag
-    <i class="close material-icons">close</i>
-  </div>
-
-  <div class="chip">
-    Tag
-    <i class="close material-icons">close</i>
-  </div>
-
-<!--this is the frostlayer-->
-  <div id="frostdiv">
-    <div class="content">
-      <div class="col s6">
-        {{!-- <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-          <div class="flipper">
-             <div class="front">
-
-      <!-- front content -->
-                <div class="row">
-                    <div class="col s12">
-                        <div class="card-panel #e57373 red lighten-2">
-                            <span class="white-text">I am the FRONT of the card where you have entered the flashcard question. 
-                            Scroll over me to flip the card</span>
-                        </div>
-                    </div>
-                </div>
-
-              </div>
-            <div class="back">
-              <div class="row">
-                <div class="col s12">
-                  <div class="card-panel #e57373 red lighten-2">
-                    <span class="white-text">I am the BACK of the card where you have entered the flashcard question. 
-                    Scroll over me to flip the card</span>
-                  </div>
-                </div>
-              </div>
-      <!-- back content -->
-            </div>
-          </div>
-        </div> --}}
-      </div>
-    </div>
-  </div>
-
-   <form method="post" action="/createfc" class="col s12">
-
-      <div class="row">
-          <div id ="name">
-            <div class="input-field col s5 white" >
-              <input placeholder="Enter your set name here" id="first_name" name="category" type="text" class="validate">
-              <label for="first_name">Name of Set</label>
-            </div>
-          </div>
-      </div>
-
-      <div class="row">
-          <div id="inputfront">
-            <div class="input-field col s5 white">
-              <textarea id="textarea1" class="materialize-textarea" name="title"></textarea>
-              <label for="textarea1">Enter Your Flashcard Question</label>
-            </div>
-          </div>
-      </div>
+                      
+                            <div id="inputfront">
+                              <div class="input-field">
+                                <textarea id="textarea1" class="materialize-textarea" name="title"></textarea>
+                                <label for="textarea1">Enter Your Flashcard Question</label>
+                              </div>
+                            </div>
+                        
     
-      <div class="row">
-          <div id="inputback">
-              <div class="input-field col s5 white">
-                <textarea id="textarea2" class="materialize-textarea" name="flashcard_body"></textarea>
-                <label for="textarea2">Enter Your Flashcard Answer</label>
-              </div>
-          </div>
-      </div>
+                        
+                            <div id="inputback">
+                                <div class="input-field">
+                                  <textarea id="textarea2" class="materialize-textarea" name="flashcard_body"></textarea>
+                                  <label for="textarea2">Enter Your Flashcard Answer</label>
+                                </div>
+                            </div>
+                    
 
-      <div class="button">
-          <button class="btn waves-effect waves-light #e57373 red lighten-2" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
-          </button>
-      </div>
+                        <div class="button">
+                            <button class="btn waves-effect waves-light #e57373 red lighten-2" type="submit" name="action">Submit
+                              <i class="material-icons right">send</i>
+                            </button>
+                        </div>
 
-   </form>
-
-
-
-
-<!-- <script>
-  $('#textarea1').val('New Text');
-  $('#textarea1').trigger('autoresize');
-
-   $('#textarea2').val('New Text');
-  $('#textarea2').trigger('autoresize');
-</script> -->
-{{!-- <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-  <div class="flipper">
-    <div class="front">
-      <!-- front content -->
-     
-      <div class="row">
-      <div class="col s12">
-        <div class="card-panel #e57373 red lighten-2">
-          <span class="white-text">I am the FRONT of the card where you have entered the flashcard question. 
-          Scroll over me to flip the card</span>
-          </span>
-        </div>
-      </div>
+                    </form>
+                  </div> {{!-- /row module --}}
+                </div> {{!-- /frosty --}}
+            </div> {{!-- /col -6s--}}
+        </div> {{!--containerone--}}
+        <div class="col s3"></div>
     </div>
-    </div>
-    <div class="back">
-     <div class="row">
-      <div class="col s12">
-        <div class="card-panel #e57373 red lighten-2">
-          <span class="white-text">I am the BACK of the card where you have entered the flashcard question. 
-          Scroll over me to flip the card</span>
-        </div>
-      </div>
-    </div>
-      <!-- back content -->
-    </div>
-  </div>
 </div>
-</div>
-
-   </div>   --}}
