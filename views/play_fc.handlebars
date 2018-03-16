@@ -2,59 +2,93 @@
 <div class="content">
     <div class="row">
         <div class="col s3"></div>
-            <div class="col s6">
-                 <div class="frosty flashcard_play">
-                     
-                        <div class="flip-container" ontouchstart="this.classList.toggle('hover');">
-                          <div class="flipper">
-                            <div class="front">
-                              
-                              
-                                    <div class="flashcardplay card-panel #e57373 white border 50px">
-                                      <span><h5> {{category}} I am the FRONT of the card where you have entered the flashcard question. 
-                                                                    Scroll over me to flip the card</h5></span>
-                                    </div>
-                                
+        <div class="col s6">
+            <div class="frosty flashcard_play" id="board">
+                <div class="flip-container" id="flashcard" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flipper">
+                        <div class="front">
+                            <div class="flashcardplay card-panel #e57373 white border 50px">
+                                <span><h5 id="question"> <!-- front of the card --> </h5></span>
                             </div>
-                            <div class="back"> <!-- back content -->
-                              
-                                    <div class="flashcardplay card-panel #e57373 white border 50px">
-                                      <span><h5>I am the BACK of the card where you have entered the flashcard question. 
-                                      Scroll over me to flip the card</h5></span>
-                                    </div>
-
-                                  
-                                <div class="card-action">
-                                      <a class="waves-effect waves-light #e57373 red lighten-2 btn">I got it right</a>
-                                      <a class="waves-effect waves-light #e57373 red lighten-2 btn">I got it wrong</a>
-                                    </div>
-                            </div> <!-- /back -->
-                            
-                        
-                          </div> <!-- /flipper -->
-                          
-                        </div> <!-- /flip-container -->
-                       
-                      
-                     
-                
-                </div> <!-- /frosty --> 
-            </div> <!-- col s6 --> 
-           
-        
+                        </div>
+                        <div class="back"> <!-- back content -->
+                            <div class="flashcardplay card-panel #e57373 white border 50px">
+                                <span><h5 id="answer"><!-- back of the card --></h5></span>
+                            </div>
+                            <div class="card-action">
+                                <a class="waves-effect waves-light #e57373 red lighten-2 btn check_guess" id="correct" value="correct">I got it right</a>
+                                <a class="waves-effect waves-light #e57373 red lighten-2 btn check_guess" id="wrong" value="wrong">I got it wrong</a>
+                            </div>
+                        </div> <!-- /back -->
+                    </div> <!-- /flipper -->
+                </div> <!-- /flip-container -->
+            </div> <!-- /frosty --> 
+        </div> <!-- col s6 --> 
         <div class="col s3"></div>
     </div> <!-- row -->  
     <div class="row">
-          <div class="col s3"></div>
-
-            <div class="col s6">
-                 <div class="frosty">
-                      <div class="instruction row">
-                        <h5 id="instruction_flip"><b>Flip the card to get the answer</b></h5>
-                      </div>
-                 </div>
-            </div>
-
-          <div class="col s3"></div>
+        <div class="col s3"></div>
+        <div class="col s6">
+                <div class="frosty">
+                    <div class="instruction row">
+                    <h5 class="instruction_flip" id="current_category" value="{{category}}">{{category}}</h5>
+                    <h5 class="instruction_flip"><b>Flip the card to get the answer</b></h5>
+                    </div>
+                </div>
+        </div>
+        <div class="col s3"></div>
     </div>
 </div> <!-- content --> 
+
+<script>
+    $(document).ready(function(){
+      var category = $("#current_category").attr("value")
+
+      $.get("/api/flashcards/category/" + category, function(flashcards){
+          var flashcards = flashcards.flashcards
+          var randomIndex;
+            
+          $(document).on("click", "#play_again", function(){ 
+            location.reload()
+         })
+
+          function randomFlashcard() {
+              randomIndex = Math.floor(Math.random() * flashcards.length)
+              var randomFlashcard = flashcards[randomIndex]
+              $("#question").text(randomFlashcard.Title)
+              $("#answer").text(randomFlashcard.Body)
+              return randomIndex
+          }
+
+          randomFlashcard()
+
+          console.log("after random fl ", randomIndex)
+          $(document).on("click", ".check_guess", function(){
+              var userAnswer = $(this).attr("value")
+              if (userAnswer === "correct") {
+                 flashcards.splice(randomIndex, 1)
+                 console.log("flashcards", flashcards)
+                    if(flashcards.length > 0) {
+                       $('.back')
+                        randomFlashcard()
+                    } else {
+                        gameOver()
+                    }
+              } else {
+                  randomFlashcard()
+              }
+        })//onclick
+
+      }) //get
+
+          function gameOver(){
+                $("#flashcard").hide()
+                  var $gameOverText = $('<h5 id="game_over">').text("Congratulations, you compelted the set. If you whant to play again the same set, press 'Play Again', if you want to play another set comeback to 'Your Flashcards' or 'Explore other sets'.")
+                  $('#board').append($gameOverText)
+                  var $buttonStarAgain = $('<a class="waves-effect waves-light #e57373 red lighten-2 btn check_guess" id="play_again">').text("Play Again")
+                  $('#game_over').append($("<br>")).append($buttonStarAgain)
+                  gameOver = true
+                  return gameOver
+          }
+    })
+</script>

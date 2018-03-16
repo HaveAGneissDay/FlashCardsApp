@@ -158,3 +158,11 @@ h5#instruction_flip {
 form.hidden_input input{
   display: none;
 }
+
+h5#game_over{
+  padding: 40px;
+  color: rgb(97, 95, 95)
+}
+a#play_again {
+  margin-top: 40px;
+}
