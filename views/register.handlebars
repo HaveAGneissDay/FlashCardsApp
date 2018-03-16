@@ -1,35 +1,42 @@
-<div class="container">
-    {{#if errors}}
-        {{#each errors}}
-            <div class="alert alert-danger" role="alert">
-                {{msg}}
+<div class="content">
+    <div class="row">
+        <div class="col s3">
+            {{#if errors}}
+                        {{#each errors}}
+                            <div class="alert alert-danger" role="alert">
+                                {{msg}}
+                            </div>
+                        {{/each}}
+                    {{/if}}
+        </div>
+        <div id="containerone">
+            <div class="col s6">
+                <div class="frosty">
+                <div class="row module">
+                    
+                        {{#if errors}}
+                            {{#each errors}}
+                                <div class="alert alert-danger" role="alert">
+                                    {{msg}}
+                                </div>
+                            {{/each}}
+                        {{/if}}
+                        
+                            <form method="post" action="/register" class="form-horizontal" role="form">
+
+                                    <h5 class="form-signin-heading">Registration Form</h5>
+                                    {{!-- <label for="login_username" class="sr-only">Username</label> --}}
+                                    <input type="text" id="username" placeholder="Username" name="username" class="form-control" autofocus>
+                                    {{!-- <label for="login_password" class="sr-only">Password</label> --}}
+                                    <input type="password" id="password" placeholder="Password" name="password" class="form-control">
+                                    <input type="password" id="password_confirm" placeholder="Confirm password" name="conf_password" class="form-control">
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                               
+                            </form> <!-- /form -->
+                    </div> <!-- ./div frosty -->
+                </div>
             </div>
-        {{/each}}
-    {{/if}}
-            <form method="post" action="/register" class="form-horizontal" role="form">
-                <h2>Registration Form</h2>
-                <div class="form-group">
-                    <label for="firstName" class="col-sm-3 control-label">Username</label>
-                    <div class="col-sm-9">
-                        <input type="text" id="username" placeholder="Username" name="username" class="form-control" autofocus>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-sm-3 control-label">Password</label>
-                    <div class="col-sm-9">
-                        <input type="password" id="password" placeholder="Password" name="password" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="col-sm-3 control-label">Confirm Password</label>
-                    <div class="col-sm-9">
-                        <input type="password" id="password_confirm" placeholder="Password" name="conf_password" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-9 col-sm-offset-3">
-                        <button type="submit" class="btn btn-primary btn-block">Register</button>
-                    </div>
-                </div>
-            </form> <!-- /form -->
-</div> <!-- ./container -->
+        </div>
+        <div class="col s3"></div>
+    </div>
+</div>
