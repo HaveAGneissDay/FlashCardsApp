@@ -7,13 +7,12 @@
                                 {{msg}}
                             </div>
                         {{/each}}
-                    {{/if}}
+            {{/if}}
         </div>
         <div id="containerone">
             <div class="col s6">
                 <div class="frosty">
-                <div class="row module">
-                    
+                    <div class="row module">
                         {{#if errors}}
                             {{#each errors}}
                                 <div class="alert alert-danger" role="alert">
@@ -22,17 +21,15 @@
                             {{/each}}
                         {{/if}}
                         
-                            <form method="post" action="/register" class="form-horizontal" role="form">
+                        <form method="post" action="/register" class="form-horizontal" role="form">
 
-                                    <h5 class="form-signin-heading">Registration Form</h5>
-                                    {{!-- <label for="login_username" class="sr-only">Username</label> --}}
-                                    <input type="text" id="username" placeholder="Username" name="username" class="form-control" autofocus>
-                                    {{!-- <label for="login_password" class="sr-only">Password</label> --}}
-                                    <input type="password" id="password" placeholder="Password" name="password" class="form-control">
-                                    <input type="password" id="password_confirm" placeholder="Confirm password" name="conf_password" class="form-control">
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-                               
-                            </form> <!-- /form -->
+                                <h5 class="form-signin-heading">Registration Form</h5>
+                                <input type="text" id="username" placeholder="Username" name="username" class="form-control" autofocus>
+                                <input type="password" id="password" placeholder="Password" name="password" class="form-control">
+                                <input type="password" id="password_confirm" placeholder="Confirm password" name="conf_password" class="form-control">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                            
+                        </form> <!-- /form -->
                     </div> <!-- ./div frosty -->
                 </div>
             </div>

@@ -10,14 +10,9 @@
                         <h5 class="form-signin-heading">Create a flashcard</h5>
                             <div id ="name">
                                 <div class="input-field" >
-                                  {{!-- <div class="col s9"> --}}
                                       <input placeholder="Enter your set name here" id="first_name" list="sets" name="category" type="text">
-                                      <label for="first_name">Name of Set</label>
-                                  {{!-- </div> --}}
-                                  {{!-- <div class="col s3"> --}}
-                                        {{#if sets}}
+                                      <label for="first_name">Name of Set</label>                              {{#if sets}}
                                           <datalist id="sets">
-                                            
                                             {{#each sets}}
                                               <option value="{{set}}">
                                             {{/each}}
@@ -26,8 +21,6 @@
                                 </div> 
                             </div>
                       
-
-                      
                             <div id="inputfront">
                               <div class="input-field">
                                 <textarea id="textarea1" class="materialize-textarea" name="title"></textarea>
@@ -35,15 +28,12 @@
                               </div>
                             </div>
                         
-    
-                        
                             <div id="inputback">
                                 <div class="input-field">
                                   <textarea id="textarea2" class="materialize-textarea" name="flashcard_body"></textarea>
                                   <label for="textarea2">Enter Your Flashcard Answer</label>
                                 </div>
                             </div>
-                    
 
                         <div class="button">
                             <button class="btn waves-effect waves-light #e57373 red lighten-2" type="submit" name="action">Submit

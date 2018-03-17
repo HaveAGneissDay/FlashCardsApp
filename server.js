@@ -3,14 +3,16 @@ const bodyParser = require('body-parser')
 const expressHandlebars = require("express-handlebars");
 const sequelize = require('sequelize')
 const routes = require("./controllers/controller.js");
+const user = require("./controllers/user_control.js")
 const db = require("./models");
 const passport = require('passport')
 const cookieParser = require('cookie-parser')
 const expressValidator = require('express-validator')
 const flash = require('connect-flash')
 const session = require('express-session')
+const path = require('path')
 
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3031;
 
 const app = express();
 
@@ -27,7 +29,8 @@ app.use(expressValidator())
 app.use(cookieParser())
 
 // make this folder availible on the front-end
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, "/public")));
+app.use('/play', express.static(path.join(__dirname, "/public")));
 
 // Express session
 app.use(session({
@@ -53,7 +56,8 @@ app.use(function(req,res, next){
 })
 
 
-app.use(routes)
+app.use('/', routes)
+app.use('/play', user)
 
 db.sequelize.sync().then(function() {
     app.listen(PORT, function() {
