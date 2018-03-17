@@ -83,7 +83,7 @@
 
           function gameOver(){
                 $("#flashcard").hide()
-                  var $gameOverText = $('<h5 id="game_over">').text("Congratulations, you compelted the set. If you whant to play again the same set, press 'Play Again', if you want to play another set comeback to 'Your Flashcards' or 'Explore other sets'.")
+                  var $gameOverText = $('<h5 id="game_over">').text("Congratulations, you've completed the set. If you want to play this set again, press 'Play Again.' If you want to play another set, navigate to 'Your Flashcards' or 'Explore other sets'.")
                   $('#board').append($gameOverText)
                   var $buttonStarAgain = $('<a class="waves-effect waves-light #e57373 red lighten-2 btn check_guess" id="play_again">').text("Play Again")
                   $('#game_over').append($("<br>")).append($buttonStarAgain)
