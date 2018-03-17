@@ -12,7 +12,7 @@ const flash = require('connect-flash')
 const session = require('express-session')
 const path = require('path')
 
-const PORT = process.env.PORT || 3031;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
