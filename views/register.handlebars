@@ -1,26 +1,29 @@
 <div class="content">
-    <div class="row">
-        <div class="col s3">
-            {{#if errors}}
-                        {{#each errors}}
-                            <div class="alert alert-danger" role="alert">
-                                {{msg}}
-                            </div>
-                        {{/each}}
-            {{/if}}
-        </div>
-        <div id="containerone">
-            <div class="col s6">
-                <div class="frosty">
-                    <div class="row module">
-                        {{#if errors}}
+	<div class="row">
+		<div class="col s3"></div>
+			<div id="containerone">
+				<div class="col s6">
+                    {{#if errors}}
                             {{#each errors}}
                                 <div class="alert alert-danger" role="alert">
                                     {{msg}}
                                 </div>
                             {{/each}}
-                        {{/if}}
-                        
+                    {{/if}}
+                </div>
+            </div>
+        <div class="col s3"></div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="row">
+        <div class="col s3">
+        </div>
+        <div id="containerone">
+            <div class="col s6">
+                <div class="frosty">
+                    <div class="row module">
                         <form method="post" action="/register" class="form-horizontal" role="form">
 
                                 <h5 class="form-signin-heading">Registration Form</h5>
