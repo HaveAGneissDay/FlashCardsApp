@@ -166,3 +166,23 @@ h5#game_over{
 a#play_again {
   margin-top: 40px;
 }
+
+div.alert.alert-danger {
+  background-color: rgba(241, 91, 54, 0.75);
+  padding: 20px;
+  border-radius: 3px;
+  margin: 5px;
+  font-size: 18px;
+  font-size: 20px;
+  text-align: center;
+  color: rgb(44, 43, 41)
+
+}
+div.alert.alert-success{
+  background-color: rgba(152, 251, 152, 0.815);
+  padding: 20px;
+  border-radius: 3px;
+  margin: 5px;
+  font-size: 20px;
+  text-align: center;
+}
